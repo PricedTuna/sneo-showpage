@@ -1,3 +1,6 @@
+export const githubUrl = 'https://github.com/PricedTuna/sneo-showpage'
+export const npmUrl = 'https://www.npmjs.com/package/sneo-brutalism'
+
 export const navigationSections = [
   { href: '/', label: 'SNEO', icon: 'M3 10l9-7 9 7v10H3z M9 20v-6h6v6' },
   { href: '/primeros-pasos', label: 'Primeros pasos', icon: 'M3 4h5a4 4 0 0 1 4 4v13a4 4 0 0 0-4-4H3z M21 4h-5a4 4 0 0 0-4 4v13a4 4 0 0 1 4-4h5z' },

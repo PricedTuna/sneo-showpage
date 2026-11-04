@@ -4,6 +4,8 @@ import { Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import { DesktopNavigation } from '../components/DesktopNavigation'
 import { SidebarNavigation } from '../components/SidebarNavigation'
+import { githubUrl, npmUrl } from '../components/navigationSections'
+import { ExternalIcon } from '../components/ExternalIcon'
 import 'nextra-theme-docs/style.css'
 import 'sneo-brutalism/styles.css'
 import './globals.css'
@@ -28,7 +30,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           toc={{ float: false }}
           nextThemes={{ forcedTheme: 'light', defaultTheme: 'light' }}
           pageMap={await getPageMap()}
-          footer={<Footer>Sneo Brutalism</Footer>}
+          footer={<Footer><div className="footer-content"><span>Sneo Brutalism</span><a href={githubUrl}><ExternalIcon service="github" />GitHub</a><a href={npmUrl}><ExternalIcon service="npm" />npm</a></div></Footer>}
         >
           {children}
         </Layout>

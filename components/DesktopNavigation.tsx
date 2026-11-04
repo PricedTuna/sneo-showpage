@@ -3,7 +3,8 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState, type ReactNode } from 'react'
-import { navigationSections } from './navigationSections'
+import { githubUrl, npmUrl, navigationSections } from './navigationSections'
+import { ExternalIcon } from './ExternalIcon'
 
 export function DesktopNavigation({ children }: { children: ReactNode }) {
   const pathname = usePathname()
@@ -53,6 +54,10 @@ export function DesktopNavigation({ children }: { children: ReactNode }) {
           </svg>
           <span>{collapsed ? 'Expandir menú' : 'Contraer menú'}</span>
         </button>
+        <div className="navigation-external-links">
+          <a href={githubUrl} aria-label="GitHub" title="GitHub"><ExternalIcon service="github" /></a>
+          <a href={npmUrl} aria-label="npm" title="npm"><ExternalIcon service="npm" /></a>
+        </div>
       </aside>
       {children}
     </div>
