@@ -1,0 +1,323 @@
+:root {
+  color-scheme: light;
+  --ink: #191724;
+  --muted: #514d60;
+  --paper: #f7f5ef;
+  --surface: #fffdfa;
+  --yellow: #ffd029;
+  --lavender: #e5dcff;
+  --mint: #dcf2e6;
+  --focus: #5335ba;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+:where(a, button, input, select):focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 4px;
+}
+
+.showcase {
+  font-family: system-ui, sans-serif;
+  padding: 2rem 0 5rem;
+}
+
+.eyebrow, .card-top, .install span, .feature-grid b {
+  font: 700 .75rem/1.4 monospace;
+  letter-spacing: .08em;
+}
+
+.eyebrow span { color: var(--muted); }
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+  margin: 2rem 0 3.5rem;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(2.65rem, 6vw, 5.5rem);
+  line-height: 1.02;
+  letter-spacing: -.065em;
+  font-weight: 900;
+}
+
+.hero h1 em {
+  font-style: normal;
+  background: var(--lavender);
+  padding-inline: .08em;
+  box-decoration-break: clone;
+}
+
+.hero p, .intro p {
+  color: var(--muted);
+  font-size: 1.1rem;
+  line-height: 1.65;
+  max-width: 34rem;
+  margin: 1.5rem 0;
+}
+
+.actions, .demo-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.action, .feature-grid a {
+  border: 2px solid var(--ink);
+  background: var(--surface);
+  color: var(--ink);
+  text-decoration: none;
+  box-shadow: 4px 4px var(--ink);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.action {
+  padding: .85rem 1rem;
+  font: 700 .875rem monospace;
+}
+
+.action.primary { background: var(--yellow); }
+.action:hover, .feature-grid a:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px var(--ink);
+}
+.action:active, .feature-grid a:active {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px var(--ink);
+}
+
+.hero-card {
+  min-width: 0;
+  background: var(--lavender);
+  border: 2px solid var(--ink);
+  padding: 1.5rem;
+  box-shadow: 7px 7px var(--ink);
+}
+
+.hero-card .card-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.hero-card .demo-actions { margin: 1.5rem 0; }
+.hero-card label { display: flex; gap: .6rem; align-items: center; }
+
+.install {
+  background: var(--ink);
+  color: var(--surface);
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  --sneo-border: #fffdfa;
+}
+
+.install span, .install code { display: block; }
+.install span { color: var(--yellow); margin-bottom: .65rem; }
+.install code { overflow-wrap: anywhere; }
+
+.intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: end;
+  margin: 4.5rem 0 2rem;
+}
+
+.intro h2 {
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  line-height: 1.04;
+  letter-spacing: -.05em;
+  margin: .75rem 0 0;
+  font-weight: 850;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 3rem;
+}
+
+.feature-grid a { padding: 1.4rem; }
+.feature-grid a:nth-child(2) { background: var(--lavender); }
+.feature-grid a:nth-child(3) { background: var(--mint); }
+.feature-grid h3 { font-size: 1.3rem; font-weight: 800; margin: 1.5rem 0 .65rem; }
+.feature-grid p { line-height: 1.5; }
+
+.builder { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; }
+.controls label { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin: 1rem 0; }
+.controls input { background: white; color: var(--ink); border: 2px solid var(--ink); padding: .3rem; max-width: 50%; }
+.preview { border: 2px solid var(--ink); padding: 1.5rem; background: var(--surface); box-shadow: 5px 5px var(--ink); margin-block: 1rem; }
+.preview > * + * { margin-top: 1rem; }
+.codeblock { background: var(--ink); color: var(--surface); padding: 1rem; overflow: auto; white-space: pre-wrap; margin-block: 1rem; }
+
+/* Keep Sneo's own easing and pressed offsets, with enough time to see them. */
+.showcase, .preview { --sneo-duration: 150ms; }
+
+/* The package uses white text on green, which falls below 4.5:1. */
+.sneo-button--green { color: #191724; }
+
+@media (max-width: 750px) {
+  .hero, .intro, .builder, .feature-grid { grid-template-columns: 1fr; }
+  .intro { gap: .5rem; margin-top: 3.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .action, .feature-grid a { transition: none; }
+}
+
+#primeros-pasos { scroll-margin-top: 6rem; }
+.prop-table { overflow-x: auto; margin-block: 1rem; }
+.prop-table table { width: 100%; border-collapse: collapse; text-align: left; }
+.prop-table th, .prop-table td { border: 1px solid #c5c0cc; padding: .65rem; vertical-align: top; }
+.prop-table thead { background: var(--lavender); }
+.prop-table tbody th { background: var(--surface); }
+.showcase:has(.hero) { padding-bottom: 1rem; }
+.showcase-links { padding-top: 0; }
+.showcase-links .intro { margin-top: 3rem; }
+.component-doc { max-width: 60rem; margin-inline: auto; padding: 3rem 1.5rem 5rem; }
+.component-doc h1 { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 850; line-height: 1.1; }
+.component-doc h2 { font-size: 1.5rem; font-weight: 750; margin-block: 2rem .8rem; }
+.component-doc p { margin-block: .75rem; }
+
+body {
+  --grid-line: rgb(91 86 104 / 8%);
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.component-explorer {
+  display: grid;
+  grid-template-columns: minmax(8rem, 11rem) minmax(0, 1fr);
+  margin-block: 1.5rem;
+  border: 1px solid #d8d4df;
+  background: var(--surface);
+}
+
+.component-menu {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  overflow: auto;
+  max-height: min(70vh, 40rem);
+  padding: .9rem;
+  border-inline-end: 1px solid #d8d4df;
+}
+
+.component-menu button {
+  flex: none;
+  min-height: 2.75rem;
+  padding: .7rem .85rem;
+  color: var(--ink);
+  border: 1px solid transparent;
+  font: 700 .875rem monospace;
+  text-align: start;
+  cursor: pointer;
+}
+
+.component-menu button:hover { background: var(--paper); }
+.component-menu button[aria-pressed="true"] {
+  background: var(--lavender);
+  border-color: #a89abe;
+}
+.component-menu button:focus-visible { outline-offset: -3px; }
+
+.component-panel {
+  max-height: min(70vh, 40rem);
+  overflow: auto;
+}
+
+.component-panel .component-doc { padding: 1.25rem 1.5rem 2rem; }
+.component-panel .component-doc h2 { margin-top: 0; }
+.component-panel .component-doc h3 { margin-block: 1.5rem .75rem; font-weight: 750; }
+
+@media (max-width: 640px) {
+  .component-explorer { grid-template-columns: minmax(0, 1fr); }
+  .component-menu {
+    flex-direction: row;
+    border-inline-end: 0;
+    border-bottom: 1px solid #d8d4df;
+  }
+  .component-panel { max-height: 65vh; }
+}
+
+.actions {
+  column-gap: 1.25rem;
+  row-gap: 1rem;
+  margin-block: 1.75rem .5rem;
+}
+
+.action {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.85rem;
+}
+
+.nextra-toc > div {
+  top: calc(var(--nextra-navbar-height) + 1.25rem);
+  max-height: calc(100dvh - var(--nextra-navbar-height) - 2.5rem);
+  margin-block: 1.25rem;
+  background: #f3eefb;
+  border: 1px solid #d8cde7;
+  box-shadow: 4px 4px 0 #e5dcef;
+}
+
+.nextra-toc > div > p {
+  color: var(--ink);
+  font: 750 .75rem/1.5 monospace;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.nextra-toc li { margin-block: .3rem; }
+
+.nextra-toc li a {
+  padding: .5rem .65rem;
+  border-inline-start: 2px solid transparent;
+  color: var(--muted);
+}
+
+.nextra-toc li a:hover,
+.nextra-toc li a:focus-visible {
+  background: var(--surface);
+  border-inline-start-color: #9177bd;
+  color: var(--ink);
+}
+
+.nextra-sidebar {
+  align-self: flex-start;
+  height: auto;
+  max-height: calc(100dvh - var(--nextra-navbar-height) - 2.5rem);
+  top: calc(var(--nextra-navbar-height) + 1.25rem);
+  margin-block: 1.25rem;
+  background: #f3eefb;
+  border: 1px solid #d8cde7;
+  box-shadow: 4px 4px 0 #e5dcef;
+}
+
+.nextra-sidebar > :first-child {
+  min-height: 0;
+  flex-grow: 0;
+}
+
+.nextra-sidebar-footer {
+  background: transparent;
+}
+
+.nextra-mobile-nav {
+  background: #f3eefb;
+}

@@ -1,0 +1,52 @@
+---
+title: Sneo Brutalism
+---
+
+import { Showcase, ShowcaseLinks } from '../components/Showcase'
+
+import { ThemeBuilder } from '../components/ThemeBuilder'
+
+<Showcase />
+
+## Primeros pasos
+
+Instala la biblioteca en tu proyecto React:
+
+```bash
+npm install sneo-brutalism
+```
+
+Importa los estilos una vez y utiliza los componentes:
+
+```tsx
+import { Button } from 'sneo-brutalism'
+import 'sneo-brutalism/styles.css'
+
+export function App() {
+  return <Button>Hola, Sneo</Button>
+}
+```
+
+### Configuración compartida
+
+```tsx
+import { Button, ThemeProvider } from 'sneo-brutalism'
+import 'sneo-brutalism/styles.css'
+
+export function App() {
+  return <ThemeProvider config={{ primaryColor: '#ffd029' }}>
+    <Button>Color compartido</Button>
+    <Button theme={{ primaryColor: '#a8e6a3' }}>Color individual</Button>
+  </ThemeProvider>
+}
+```
+
+Los valores predeterminados se aplican primero, después la configuración del proveedor y finalmente la prop `theme` del componente. Los proveedores anidados heredan la configuración del proveedor padre.
+
+### Constructor de tema
+
+Ajusta el tema y copia la configuración para tu aplicación.
+
+<ThemeBuilder />
+
+<ShowcaseLinks />

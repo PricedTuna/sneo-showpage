@@ -1,0 +1,23 @@
+# Dependencies
+/node_modules/
+/.pnp.*
+
+# Next.js and build output
+/.next/
+/out/
+/build/
+/coverage/
+*.tsbuildinfo
+/next-env.d.ts
+
+# Environment variables
+.env*
+!.env.example
+
+# Logs and local system files
+*.log
+.DS_Store
+Thumbs.db
+
+# Local tooling
+.vercel/

@@ -1,0 +1,21 @@
+'use client'
+import Link from 'next/link'
+import { Button, Card, Checkbox, Dropdown, Alert } from 'sneo-brutalism'
+import { useState } from 'react'
+
+export function Showcase() {
+  const [copied, setCopied] = useState(false)
+  const [selected, setSelected] = useState(false)
+  return <div className="showcase">
+    <div className="eyebrow">● REACT COMPONENT LIBRARY <span> / v0.1.0</span></div>
+    <div className="hero"><div><h1>Interfaces con <em>carácter.</em></h1><p>Componentes React con bordes contundentes, colores vivos y una personalidad que no pasa desapercibida.</p><div className="actions"><Link className="action primary" href="/#primeros-pasos">Empezar →</Link><Link className="action" href="/componentes">Ver componentes ↗</Link><Link className="action" href="/tema">Constructor de tema ↗</Link></div></div><div className="hero-card"><div className="card-top"><span>UNA PEQUEÑA DEMO</span><span>✳</span></div><Card title="Hola, mundo.">Diseñado para construir cosas que se sienten diferentes.</Card><div className="demo-actions"><Button variant="blue">Botón de ejemplo</Button><Dropdown label="Opciones" items={[{id:'hello',label:'Saludar',onSelect:()=>setSelected(true)}]} /></div><label><Checkbox checked={selected} onChange={e=>setSelected(e.target.checked)} /> Me gusta lo que veo</label></div></div>
+    <div className="install"><div><span>EMPIEZA EN TU PROYECTO</span><code>npm install sneo-brutalism</code></div><Button variant="yellow" onClick={async()=>{try {await navigator.clipboard.writeText('npm install sneo-brutalism'); setCopied(true)} catch {setCopied(false)}}}>{copied ? 'Copiado ✓' : 'Copiar ↗'}</Button></div>
+  </div>
+}
+
+export function ShowcaseLinks() {
+  return <div className="showcase showcase-links">
+    <div className="intro"><div><div className="eyebrow">01 / HECHO PARA CONSTRUIR</div><h2>Menos plantilla.<br />Más personalidad.</h2></div><p>Una caja de herramientas para crear experiencias expresivas. Explora los componentes, modifica sus estilos y encuentra tu propia versión de Sneo.</p></div>
+    <div className="feature-grid"><Link href="/componentes"><b>01 / COMPONENTES</b><h3>Piezas con actitud ↗</h3><p>Botones, formularios, tarjetas y más. Listos para usar en React.</p></Link><Link href="/tema"><b>02 / TEMA</b><h3>Hazlo tuyo ↗</h3><p>Ajusta colores, bordes y movimiento con ThemeProvider.</p></Link><Link href="/playground"><b>03 / PLAYGROUND</b><h3>Prueba el código ↗</h3><p>Edita un ejemplo y observa el resultado en vivo.</p></Link></div><Alert variant="info">Sneo está en desarrollo. Esta documentación corresponde a la versión 0.1.0.</Alert>
+  </div>
+}
