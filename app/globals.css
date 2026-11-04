@@ -321,3 +321,17 @@ body {
 .nextra-mobile-nav {
   background: #f3eefb;
 }
+
+.copy-page-control {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: .75rem;
+  margin-block: .75rem 1.5rem;
+}
+
+.copy-page-control [role="status"] {
+  font-size: .875rem;
+  color: var(--muted);
+}

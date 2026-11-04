@@ -20,6 +20,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           navbar={<Navbar logo={<strong>Sneo</strong>} />}
           darkMode={false}
           search={null}
+          copyPageButton={false}
           toc={{ title: 'En esta página', backToTop: 'Volver arriba' }}
           nextThemes={{ forcedTheme: 'light', defaultTheme: 'light' }}
           pageMap={await getPageMap()}
