@@ -1,11 +1,37 @@
-import { ThemeBuilder } from '../../components/ThemeBuilder'
+import { InstallCommand } from '../../components/InstallCommand'
 
 # Primeros pasos
 
-Consulta la [guía de instalación y uso](/#primeros-pasos) y prueba aquí cómo cambiar el tema de tus componentes.
+Instala la biblioteca en tu proyecto React:
 
-## Constructor de tema
+<InstallCommand />
 
-Ajusta los valores, prueba los componentes y copia la configuración generada.
+Importa los estilos una vez y utiliza los componentes:
 
-<ThemeBuilder />
+```tsx
+import { Button } from 'sneo-brutalism'
+import 'sneo-brutalism/styles.css'
+
+export function App() {
+  return <Button>Hola, Sneo</Button>
+}
+```
+
+### Configuración compartida
+
+```tsx
+import { Button, ThemeProvider } from 'sneo-brutalism'
+import 'sneo-brutalism/styles.css'
+
+export function App() {
+  return <ThemeProvider config={{ primaryColor: '#ffd029' }}>
+    <Button>Color compartido</Button>
+    <Button theme={{ primaryColor: '#a8e6a3' }}>Color individual</Button>
+  </ThemeProvider>
+}
+```
+
+Los valores predeterminados se aplican primero, después la configuración del proveedor y finalmente la prop `theme` del componente. Los proveedores anidados heredan la configuración del proveedor padre.
+
+
+Continúa con el [constructor de tema](/tema) o explora el [catálogo de componentes](/componentes).

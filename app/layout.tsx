@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Footer, Layout, Navbar } from 'nextra-theme-docs'
 import { Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
+import { DesktopNavigation } from '../components/DesktopNavigation'
 import { SidebarNavigation } from '../components/SidebarNavigation'
 import 'nextra-theme-docs/style.css'
 import 'sneo-brutalism/styles.css'
@@ -18,6 +19,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <Head />
       <body>
         <SidebarNavigation />
+        <DesktopNavigation>
         <Layout
           navbar={<Navbar logo={null} logoLink={false} />}
           darkMode={false}
@@ -30,6 +32,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         >
           {children}
         </Layout>
+        </DesktopNavigation>
       </body>
     </html>
   )

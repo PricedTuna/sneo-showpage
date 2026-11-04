@@ -21,7 +21,7 @@ function EditorActions() {
   const { sandpack } = useSandpack()
   const [message, setMessage] = useState('')
   return <>
-    <div className="demo-actions">
+    <div className="demo-actions playground-actions">
       <Button onClick={() => { sandpack.resetAllFiles(); setMessage('Ejemplo restablecido') }}>
         Restablecer código
       </Button>
@@ -37,10 +37,12 @@ export function HelloWorldPlayground() {
     files={{ [file]: example }}
     customSetup={{ dependencies: { 'sneo-brutalism': '0.1.0' } }}
   >
+    <div className="playground-workspace">
     <EditorActions />
     <SandpackLayout>
       <SandpackCodeEditor showTabs showInlineErrors />
       <SandpackPreview showRefreshButton />
     </SandpackLayout>
+    </div>
   </SandpackProvider>
 }
