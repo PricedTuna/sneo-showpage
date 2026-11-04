@@ -17,11 +17,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <Head />
       <body>
         <Layout
-          navbar={<Navbar logo={<strong>Sneo</strong>} />}
+          navbar={<Navbar logo={null} logoLink={false} />}
           darkMode={false}
           search={null}
           copyPageButton={false}
-          toc={{ title: 'En esta página', backToTop: 'Volver arriba' }}
+          toc={{ float: false }}
           nextThemes={{ forcedTheme: 'light', defaultTheme: 'light' }}
           pageMap={await getPageMap()}
           footer={<Footer>Sneo Brutalism</Footer>}

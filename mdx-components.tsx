@@ -10,7 +10,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ...themeComponents,
     ...components,
     wrapper: (props) => (
-      <ThemeWrapper {...props}>
+      <ThemeWrapper {...props} toc={props.toc?.filter((item: { id: string }) => item.id !== 'primeros-pasos') ?? []}>
         {typeof props.sourceCode === 'string' && <CopyPageButton source={props.sourceCode} />}
         {props.children}
       </ThemeWrapper>

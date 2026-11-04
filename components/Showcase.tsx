@@ -2,14 +2,14 @@
 import Link from 'next/link'
 import { Button, Card, Checkbox, Dropdown, Alert } from 'sneo-brutalism'
 import { useState } from 'react'
+import { InstallCommand } from './InstallCommand'
 
 export function Showcase() {
-  const [copied, setCopied] = useState(false)
   const [selected, setSelected] = useState(false)
   return <div className="showcase">
     <div className="eyebrow">● REACT COMPONENT LIBRARY <span> / v0.1.0</span></div>
     <div className="hero"><div><h1>Interfaces con <em>carácter.</em></h1><p>Componentes React con bordes contundentes, colores vivos y una personalidad que no pasa desapercibida.</p><div className="actions"><Link className="action primary" href="/#primeros-pasos">Empezar →</Link><Link className="action" href="/componentes">Ver componentes ↗</Link><Link className="action" href="/tema">Constructor de tema ↗</Link></div></div><div className="hero-card"><div className="card-top"><span>UNA PEQUEÑA DEMO</span><span>✳</span></div><Card title="Hola, mundo.">Diseñado para construir cosas que se sienten diferentes.</Card><div className="demo-actions"><Button variant="blue">Botón de ejemplo</Button><Dropdown label="Opciones" items={[{id:'hello',label:'Saludar',onSelect:()=>setSelected(true)}]} /></div><label><Checkbox checked={selected} onChange={e=>setSelected(e.target.checked)} /> Me gusta lo que veo</label></div></div>
-    <div className="install"><div><span>EMPIEZA EN TU PROYECTO</span><code>npm install sneo-brutalism</code></div><Button variant="yellow" onClick={async()=>{try {await navigator.clipboard.writeText('npm install sneo-brutalism'); setCopied(true)} catch {setCopied(false)}}}>{copied ? 'Copiado ✓' : 'Copiar ↗'}</Button></div>
+    <InstallCommand featured />
   </div>
 }
 

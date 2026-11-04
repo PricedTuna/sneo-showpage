@@ -1,5 +1,7 @@
 'use client'
 
+import { CopyButton } from './CopyButton'
+
 import {
   SandpackCodeEditor, SandpackLayout, SandpackPreview, SandpackProvider, useSandpack,
 } from '@codesandbox/sandpack-react'
@@ -23,14 +25,7 @@ function EditorActions() {
       <Button onClick={() => { sandpack.resetAllFiles(); setMessage('Ejemplo restablecido') }}>
         Restablecer código
       </Button>
-      <Button variant="blue" onClick={async () => {
-        try {
-          await navigator.clipboard.writeText(sandpack.files[file].code)
-          setMessage('Código copiado')
-        } catch {
-          setMessage('Selecciona y copia el código desde el editor.')
-        }
-      }}>Copiar código</Button>
+      <CopyButton text={sandpack.files[file].code} label="Copiar código del editor" />
       <span role="status">{message}</span>
     </div>
   </>
