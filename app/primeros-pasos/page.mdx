@@ -35,3 +35,37 @@ Los valores predeterminados se aplican primero, después la configuración del p
 
 
 Continúa con el [constructor de tema](/tema) o explora el [catálogo de componentes](/componentes).
+
+### Ajustes por componente
+
+Todos los componentes admiten `shadowOffset` en píxeles, incluidos `HelloWorld` y los enlaces `TopNavbarItem` y `BottomNavbarItem`. La prop directa prevalece sobre `theme.shadowOffset` y `ThemeProvider`; `0` elimina una sombra estática. Los componentes sin sombra conservan ese aspecto mientras no se configure un valor.
+
+`Button`, las tarjetas seleccionables y el disparador de `Dropdown` admiten también `elevation`, `hoverElevation` y `pressedOffset` directamente. `Tabs` permite ajustar la elevación de la pestaña activa con `elevation`. Utiliza valores no negativos y mantén `pressedOffset` igual o menor que `shadowOffset`.
+
+```tsx
+import { Accordion, Badge, Button, ThemeProvider } from 'sneo-brutalism'
+
+export function Ejemplo() {
+  return (
+    <ThemeProvider config={{ shadowOffset: 6, elevation: 2 }}>
+      <Button padding="12px 24px" shadowOffset={0} elevation={0} hoverElevation={0} pressedOffset={0}>
+        Botón plano
+      </Button>
+      <Badge variant="green" padding="6px 12px" shadowOffset={2}>Listo</Badge>
+      <Accordion title="Más información" shadowOffset={4}>
+        Contenido desplegable.
+      </Accordion>
+    </ThemeProvider>
+  )
+}
+```
+
+`padding` acepta un valor CSS o un número en píxeles en `Button` y `Badge`. Cuando existe, la prop `style` tiene prioridad sobre los estilos generados, incluido `style.padding`.
+
+En `Dropdown`, `shadowOffset` afecta tanto al disparador como al panel y sobrescribe `dropdownShadowOffset`. En `Select`, afecta al control y al selector personalizado en los navegadores compatibles. En `TopNavbar`, `shadow={false}` oculta la sombra aunque se haya configurado un desplazamiento.
+
+### Navegación y contenido
+
+El catálogo incluye [Tabs](/componentes/tabs), [Accordion](/componentes/accordion), [Badge](/componentes/badge), [TopNavbar](/componentes/topnavbar) y [BottomNavbar](/componentes/bottomnavbar), con ejemplos y tablas de propiedades.
+
+Las barras se fijan al viewport: reserva espacio encima o debajo del contenido para evitar que lo cubran. Elige la barra visible mediante media queries de CSS para mostrar la adecuada desde el primer render. Define `active` en el enlace actual y añade un nombre accesible con `aria-label`, especialmente si solo contiene un icono.

@@ -5,3 +5,26 @@ import { ThemeBuilder } from '../../components/ThemeBuilder'
 Ajusta los valores y observa los componentes reales. Los colores afectan únicamente a los elementos que los utilizan; las variantes verde y rosa conservan sus colores.
 
 <ThemeBuilder />
+
+## Prioridad de configuración
+
+Los valores se resuelven en este orden: estilos predeterminados, `ThemeProvider` (con herencia entre proveedores), `theme` del componente y props directas como `shadowOffset` o `elevation`. Cuando el componente admite `style`, sus valores tienen prioridad sobre los estilos generados.
+
+| Ajuste | Valor predeterminado | Unidad o formato |
+| --- | --- | --- |
+| `primaryColor` | `#ffd029` | Color CSS |
+| `accentColor` | `#0500ff` | Color CSS |
+| `borderColor` | `#000` | Color CSS |
+| `fontFamily` | JetBrains Mono y fuentes alternativas del sistema | Familia CSS |
+| `elevation` | `2` | px |
+| `hoverElevation` | `6` | px |
+| `pressedOffset` | `2` | px |
+| `shadowOffset` | `4` | px |
+| `dropdownShadowOffset` | `8` | px |
+| `borderWidth` | `2` | px |
+| `borderRadius` | `0` | px |
+| `animationDuration` | `60` | ms |
+
+Los colores mostrados inicialmente en el constructor son una configuración de ejemplo. `primaryColor` afecta a las variantes amarillas, al título de las tarjetas y a las opciones del menú al pasar el cursor; `accentColor` afecta a las variantes azules y a las tarjetas seleccionadas. Verde y rosa mantienen sus colores. Si quieres JetBrains Mono, cárgala en tu aplicación.
+
+`shadowOffset={0}` elimina una sombra estática; para un botón completamente plano configura también `elevation={0}`, `hoverElevation={0}` y `pressedOffset={0}`. Los componentes que normalmente no tienen sombra conservan ese aspecto hasta recibir una configuración. `TopNavbar` permite además ocultarla con `shadow={false}`.

@@ -2,12 +2,19 @@ import type { names } from './componentNames'
 
 type Row = [prop: string, type: string, fallback: string, description: string]
 type Reference = { props: Row[]; note: string }
+export const shadow: Row = ['shadowOffset', 'number', 'Tema o estilo del componente', 'Desplazamiento de la sombra en píxeles. La prop directa prevalece sobre theme y ThemeProvider; 0 elimina una sombra estática.']
+export const elevation: Row[] = [
+  ['elevation', 'number', '2', 'Elevación en reposo en píxeles.'],
+  ['hoverElevation', 'number', '6', 'Elevación al pasar el cursor en píxeles.'],
+  ['pressedOffset', 'number', '2', 'Desplazamiento al pulsar en píxeles.'],
+]
 const theme: Row = ['theme', 'ThemeConfig', '—', 'Sobrescribe el tema de esta instancia.']
 
 export const reference: Record<typeof names[number], Reference> = {
   Button: {
     props: [
       ['variant', 'yellow | blue | green | pink', 'yellow', 'Color del botón.'],
+      ['padding', 'CSSProperties["padding"]', '10px 20px', 'Padding CSS o número en píxeles; style.padding tiene prioridad.'],
       ['type', 'button | submit | reset', 'button', 'Comportamiento dentro de un formulario.'],
       ['disabled', 'boolean', 'false', 'Impide activar el botón.'], theme,
     ],
@@ -99,5 +106,51 @@ export const reference: Record<typeof names[number], Reference> = {
     ],
     note: 'Admite atributos de div. Explica el estado con texto para que el color no sea la única señal.',
   },
-  HelloWorld: { props: [], note: 'Componente de ejemplo sin propiedades configurables.' },
+  Badge: {
+    props: [
+      ['variant', 'yellow | blue | green | pink', 'yellow', 'Color de la etiqueta.'],
+      ['padding', 'CSSProperties["padding"]', 'Estilo de la biblioteca', 'Padding CSS o número en píxeles; style.padding tiene prioridad.'], theme,
+    ],
+    note: 'Etiqueta sin interacción. Admite atributos de span y ref; no la uses como sustituto de un botón.',
+  },
+  Accordion: {
+    props: [
+      ['title', 'ReactNode', 'Obligatorio', 'Encabezado que abre y cierra el contenido.'],
+      ['children', 'ReactNode', '—', 'Contenido desplegable.'],
+      ['open', 'boolean', 'false', 'Muestra inicialmente el contenido expandido.'],
+      ['name', 'string', '—', 'Agrupa acordeones mutuamente exclusivos en navegadores compatibles.'],
+      ['onToggle', 'ReactEventHandler<HTMLDetailsElement>', '—', 'Notifica cambios del elemento details.'], theme,
+    ],
+    note: 'Usa details y summary nativos. Admite sus atributos y ref, y se puede activar con teclado.',
+  },
+  Tabs: {
+    props: [
+      ['items', 'TabItem[]', 'Obligatorio', 'Cada pestaña incluye id único, label y content; disabled es opcional.'],
+      ['value', 'string', '—', 'Identificador seleccionado en modo controlado.'],
+      ['defaultValue', 'string', 'Primera pestaña habilitada', 'Selección inicial en modo no controlado.'],
+      ['onChange', '(value: string) => void', '—', 'Recibe el identificador seleccionado.'],
+      ['label', 'string', 'Pestañas', 'Nombre accesible del grupo.'],
+      ['elevation', 'number', 'Tema o estilo del componente', 'Elevación de la pestaña activa en píxeles.'], theme,
+    ],
+    note: 'Flechas, Inicio y Fin activan pestañas y omiten las deshabilitadas. Admite atributos de div salvo defaultValue y onChange nativos.',
+  },
+  TopNavbar: {
+    props: [
+      ['brand, action', 'ReactNode', '—', 'Marca inicial y acción final opcionales.'],
+      ['children', 'ReactNode', '—', 'Enlaces TopNavbarItem.'],
+      ['shadow', 'boolean', 'true', 'false oculta la sombra independientemente del desplazamiento.'],
+      ['TopNavbarItem.active', 'boolean', 'false', 'Indica el enlace de la página actual.'],
+      ['TopNavbarItem.shadowOffset', 'number', 'Heredado', 'Sobrescribe la sombra del enlace.'], theme,
+    ],
+    note: 'Barra fija superior: reserva espacio encima del contenido y dale un aria-label. Los elementos admiten atributos de a y ref; la barra admite atributos de nav y ref. En esta demo se posiciona dentro de la vista previa.',
+  },
+  BottomNavbar: {
+    props: [
+      ['children', 'ReactNode', '—', 'Enlaces BottomNavbarItem.'],
+      ['BottomNavbarItem.active', 'boolean', 'false', 'Indica el enlace de la página actual.'],
+      ['BottomNavbarItem.shadowOffset', 'number', 'Heredado', 'Sobrescribe la sombra del enlace.'], theme,
+    ],
+    note: 'Barra fija inferior: reserva espacio debajo del contenido y dale un aria-label. Los elementos admiten atributos de a y ref; la barra admite atributos de nav y ref. En esta demo se posiciona dentro de la vista previa.',
+  },
+  HelloWorld: { props: [theme], note: 'Texto de ejemplo en español. Admite atributos de p, theme y shadowOffset.' },
 }

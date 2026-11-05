@@ -25,5 +25,5 @@ export default {
   playground: section('Playground', 'M3 4h18v16H3z M7 9l3 3-3 3 M13 15h4'),
   github: { title: h('span', { className: 'sidebar-section' }, h(ExternalIcon, { service: 'github' }), h('span', { className: 'external-link-label' }, 'GitHub')), href: githubUrl },
   npm: { title: h('span', { className: 'sidebar-section' }, h(ExternalIcon, { service: 'npm' }), h('span', { className: 'external-link-label' }, 'npm')), href: npmUrl },
-  '*': { type: 'doc' },
+  '*': { type: 'doc', theme: { breadcrumb: false } },
 }

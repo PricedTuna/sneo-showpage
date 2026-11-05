@@ -209,21 +209,73 @@ body {
 
 .component-explorer {
   --catalog-border: var(--line);
-  display: grid;
-  grid-template-columns: minmax(9rem, 12rem) minmax(0, 1fr);
-  gap: clamp(1rem, 2vw, 2rem);
-  align-items: flex-start;
+  min-width: 0;
   margin-block: 2rem;
 }
 
 .component-catalog {
-  position: sticky;
-  top: calc(var(--nextra-navbar-height) + 1rem);
-  min-width: 0;
-  border: 1px solid var(--catalog-border);
+  position: fixed;
+  z-index: 120;
+  top: max(1rem, env(safe-area-inset-top));
+  left: max(1rem, env(safe-area-inset-left));
+  display: flex;
+  flex-direction: column;
+  width: min(19rem, calc(100vw - 2rem));
+  max-height: calc(100dvh - 8rem);
+  border: 2px solid var(--ink);
   background: var(--surface);
-  box-shadow: 4px 4px 0 var(--panel);
+  box-shadow: 4px 4px 0 var(--ink);
 }
+
+.component-catalog[hidden], .component-catalog-toggle[hidden] { display: none; }
+
+.component-catalog-toggle {
+  position: fixed;
+  z-index: 120;
+  top: max(1rem, env(safe-area-inset-top));
+  left: max(1rem, env(safe-area-inset-left));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: .25rem;
+  width: 2.8rem;
+  height: 2.8rem;
+  border: 2px solid var(--ink);
+  background: var(--surface);
+  box-shadow: 4px 4px 0 var(--ink);
+  cursor: pointer;
+}
+
+.component-catalog-toggle span {
+  width: 1.2rem;
+  height: 2px;
+  background: var(--ink);
+}
+
+.component-catalog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .65rem .9rem;
+  border-bottom: 1px solid var(--catalog-border);
+}
+
+.component-catalog-header button {
+  width: 2.75rem;
+  height: 2.75rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Reserve the upper-left corner for the floating catalog control. */
+.top-navigation-shell:has(.component-explorer) .desktop-top-navigation > .sneo-top-navbar {
+  left: calc(50% + 2rem);
+  width: calc(100% - 6rem);
+}
+
+
 
 .component-search {
   display: grid;
@@ -251,7 +303,8 @@ body {
   display: grid;
   gap: .8rem;
   overflow: auto;
-  max-height: min(34rem, 55dvh);
+  min-height: 0;
+  overscroll-behavior: contain;
   padding: .7rem;
 }
 
@@ -391,15 +444,6 @@ body {
 .component-code-toolbar { display: flex; align-items: center; flex-wrap: wrap; justify-content: space-between; gap: .75rem; }
 .component-details [role="status"] { font-size: .85rem; color: var(--muted); }
 
-@media (max-width: 760px) {
-  .component-explorer { grid-template-columns: minmax(0, 1fr); }
-  .component-catalog { position: static; }
-  .component-menu { display: flex; max-height: none; gap: .9rem; }
-  .component-group { flex: 0 0 auto; }
-  .component-group > p { white-space: nowrap; }
-  .component-group ul { display: flex; }
-  .component-menu button { white-space: nowrap; }
-}
 
 .actions {
   column-gap: 1.25rem;
@@ -442,9 +486,18 @@ body {
   padding-top: 6.5rem;
 }
 
-.mobile-shell {
-  padding-top: 0;
-  padding-bottom: 5.5rem;
+.mobile-navigation { display: none; }
+
+@media (max-width: 767px) {
+  .desktop-top-navigation { display: none; }
+  .mobile-navigation { display: block; }
+
+  .top-navigation-shell {
+    padding-top: 0;
+    padding-bottom: calc(5.5rem + env(safe-area-inset-bottom));
+  }
+
+  .top-navigation-shell:has(.component-explorer) { padding-top: 4.5rem; }
 }
 
 .top-navbar-brand {
@@ -454,7 +507,7 @@ body {
   letter-spacing: .14em;
 }
 
-.top-navigation-shell .sneo-bottom-navbar {
+.mobile-navigation .sneo-bottom-navbar {
   left: 50%;
   transform: translateX(-50%);
   width: auto;
@@ -463,18 +516,18 @@ body {
   box-shadow: 6px 6px 0 var(--ink);
 }
 
-.top-navigation-shell .sneo-bottom-navbar__item {
+.mobile-navigation .sneo-bottom-navbar__item {
   min-width: 3rem;
   min-height: 3rem;
   padding: 0.65rem;
   border-right: 3px solid var(--ink);
 }
 
-.top-navigation-shell .sneo-bottom-navbar__item:last-child {
+.mobile-navigation .sneo-bottom-navbar__item:last-child {
   border-right: 0;
 }
 
-.top-navigation-shell .sneo-bottom-navbar__item svg {
+.mobile-navigation .sneo-bottom-navbar__item svg {
   width: 1.2rem;
   height: 1.2rem;
 }
@@ -616,7 +669,7 @@ body {
 
 @media (max-width: 767px) {
   .nextra-navbar {
-    display: block;
+    display: none;
     position: fixed;
     inset: auto auto max(1rem, env(safe-area-inset-bottom)) 1rem;
     width: auto;
@@ -663,7 +716,8 @@ body {
     animation: navigation-progress 700ms ease-out both;
   }
 
-  .page-transition > div > article,
+  /* A translated ancestor makes fixed catalog controls relative to the article. */
+  .page-transition > div > article:not(:has(.component-explorer)),
   .page-transition > .component-doc {
     animation: page-enter 180ms ease-out;
   }
@@ -809,3 +863,7 @@ body {
     white-space: nowrap;
   }
 }
+
+.component-controls input[type="number"] { width: 5rem; }
+.component-controls input { max-width: 100%; }
+.component-stage .sneo-badge--green { color: #191724; }
