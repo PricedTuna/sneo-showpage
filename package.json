@@ -16,7 +16,7 @@
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "shiki": "3.23.0",
-    "sneo-brutalism": "^0.1.0",
+    "sneo-brutalism": "^0.2.0",
     "zod": "4.1.12"
   },
   "devDependencies": {

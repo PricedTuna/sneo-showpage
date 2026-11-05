@@ -24,6 +24,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <DesktopNavigation>
         <Layout
           navbar={<Navbar logo={null} logoLink={false} />}
+          sidebar={{ defaultOpen: false, toggleButton: false }}
           darkMode={false}
           search={null}
           copyPageButton={false}
