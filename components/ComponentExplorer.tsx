@@ -11,6 +11,15 @@ export function ComponentExplorer() {
   const toggleRef = useRef<HTMLButtonElement>(null)
   const catalogRef = useRef<HTMLElement>(null)
 
+  useEffect(() => {
+    const desktop = window.matchMedia('(min-width: 768px)')
+    function handleResize(event: MediaQueryListEvent) {
+      if (event.matches) setIsOpen(false)
+    }
+    desktop.addEventListener('change', handleResize)
+    return () => desktop.removeEventListener('change', handleResize)
+  }, [])
+
   function closeCatalog() {
     setIsOpen(false)
     requestAnimationFrame(() => toggleRef.current?.focus())
@@ -48,7 +57,7 @@ export function ComponentExplorer() {
 
   function handleSelect(name: (typeof names)[number]) {
     setSelected(name)
-    closeCatalog()
+    if (isOpen) closeCatalog()
   }
 
   return (
@@ -68,7 +77,7 @@ export function ComponentExplorer() {
         <span />
       </button>
 
-      <nav ref={catalogRef} id="component-catalog" hidden={!isOpen} className="component-catalog" aria-label="Catálogo de componentes">
+      <nav ref={catalogRef} id="component-catalog" className="component-catalog" aria-label="Catálogo de componentes">
         <div className="component-catalog-header">
           <strong>Componentes</strong>
           <button type="button" onClick={closeCatalog} aria-label="Cerrar catálogo">×</button>

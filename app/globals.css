@@ -227,7 +227,7 @@ body {
   box-shadow: 4px 4px 0 var(--ink);
 }
 
-.component-catalog[hidden], .component-catalog-toggle[hidden] { display: none; }
+.component-explorer.is-collapsed .component-catalog, .component-catalog-toggle[hidden] { display: none; }
 
 .component-catalog-toggle {
   position: fixed;
@@ -269,10 +269,26 @@ body {
   cursor: pointer;
 }
 
-/* Reserve the upper-left corner for the floating catalog control. */
-.top-navigation-shell:has(.component-explorer) .desktop-top-navigation > .sneo-top-navbar {
-  left: calc(50% + 2rem);
-  width: calc(100% - 6rem);
+@media (min-width: 768px) {
+  .component-explorer {
+    display: grid;
+    grid-template-columns: minmax(10rem, 13rem) minmax(0, 1fr);
+    gap: clamp(1rem, 2vw, 2rem);
+    align-items: start;
+  }
+
+  .component-catalog-toggle, .component-catalog-header { display: none; }
+
+  .component-explorer .component-catalog,
+  .component-explorer.is-collapsed .component-catalog {
+    position: sticky;
+    top: 6.5rem;
+    left: auto;
+    z-index: auto;
+    display: flex;
+    width: 100%;
+    max-height: calc(100dvh - 8rem);
+  }
 }
 
 
